@@ -26,21 +26,21 @@
       <viewAttribute id="contry">
         <descriptions defaultDescription="contry"/>
       </viewAttribute>
-      <viewAttribute hidden="true" id="JOIN$country_code_contry_code$continent"/>
+      <viewAttribute hidden="true" id="JOIN$country_code_contry_code$contry_code"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <restrictedViewAttributes/>
     <input node="Projection_1">
       <mapping xsi:type="Calculation:AttributeMapping" target="city_name" source="city_name"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="people" source="people"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$country_code_contry_code$continent" source="country_code_contry_code"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$country_code_contry_code$contry_code" source="country_code_contry_code"/>
     </input>
     <input node="Projection_2">
       <mapping xsi:type="Calculation:AttributeMapping" target="continent" source="continent"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="contry" source="contry"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$country_code_contry_code$continent" source="continent"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$country_code_contry_code$contry_code" source="contry_code"/>
     </input>
-    <joinAttribute name="JOIN$country_code_contry_code$continent"/>
+    <joinAttribute name="JOIN$country_code_contry_code$contry_code"/>
   </calculationView>
   <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
     <viewAttributes>
