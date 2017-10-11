@@ -1,0 +1,18 @@
+context contries{
+ 
+/*@@layout{"layoutInfo":{}}*/
+entity cities{
+ key city_name : String(100) not null;
+people : Integer;
+country_code : Association[0..1] to contries {contry_code};
+};
+
+/*@@layout{"layoutInfo":{}}*/
+entity contries{
+ key contry_code : String(2);
+contry : String(100);
+continent : String(100);
+};
+
+
+};

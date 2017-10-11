@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_COUNTRIES" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_COUNTRIES"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="contries.cities">
+    <resourceUri>contries.cities</resourceUri>
+  </DataSource>
+  <DataSource id="contries.contries">
+    <resourceUri>contries.contries</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="city_name">
+        <descriptions defaultDescription="city_name"/>
+      </viewAttribute>
+      <viewAttribute id="people" aggregationType="sum">
+        <descriptions defaultDescription="people"/>
+      </viewAttribute>
+      <viewAttribute id="continent">
+        <descriptions defaultDescription="continent"/>
+      </viewAttribute>
+      <viewAttribute id="contry">
+        <descriptions defaultDescription="contry"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$country_code_contry_code$continent"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="city_name" source="city_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="people" source="people"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$country_code_contry_code$continent" source="country_code_contry_code"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="continent" source="continent"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="contry" source="contry"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$country_code_contry_code$continent" source="continent"/>
+    </input>
+    <joinAttribute name="JOIN$country_code_contry_code$continent"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="city_name">
+        <descriptions defaultDescription="city_name"/>
+      </viewAttribute>
+      <viewAttribute id="people" aggregationType="sum">
+        <descriptions defaultDescription="people"/>
+      </viewAttribute>
+    
+      <viewAttribute id="country_code_contry_code">
+        <descriptions defaultDescription="country_code_contry_code"/>
+      </viewAttribute></viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="contries.cities">
+      <mapping xsi:type="Calculation:AttributeMapping" target="city_name" source="city_name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="country_code_contry_code" source="country_code.contry_code"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="people" source="people"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="continent">
+        <descriptions defaultDescription="continent"/>
+      </viewAttribute>
+      <viewAttribute id="contry">
+        <descriptions defaultDescription="contry"/>
+      </viewAttribute>
+      <viewAttribute id="contry_code">
+        <descriptions defaultDescription="contry_code"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="contries.contries">
+      <mapping xsi:type="Calculation:AttributeMapping" target="continent" source="continent"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="contry" source="contry"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="contry_code" source="contry_code"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="city_name" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="city_name"/>
+      <keyMapping columnObjectName="Join_1" columnName="city_name"/>
+    </attribute>
+    <attribute id="continent" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="continent"/>
+      <keyMapping columnObjectName="Join_1" columnName="continent"/>
+    </attribute>
+    <attribute id="contry" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="contry"/>
+      <keyMapping columnObjectName="Join_1" columnName="contry"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="people" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="people"/>
+      <measureMapping columnObjectName="Join_1" columnName="people"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="212" y="112"/>
+    
+      <rectangleSize width="140"/>
+    </shape>
+  
+    <shape expanded="false" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="212" y="217"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="297"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="281" y="297"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
